@@ -1,12 +1,20 @@
-const express=require("express");
-const router=express.Router();
+const router=require("express").Router();
 const mongoose=require('mongoose');
 const User=mongoose.model("User");
 const bcrypt=require('bcryptjs');
 
-router.post("/signup",(req,res)=>{
-const {email,password,name} = req.body;
-console.log(email + password +name);
+const uservalidation=(user,role,res)=>{
+const {email,
+    password,
+    name, 
+    dob,
+    number,
+    state,
+    country,
+    pin,
+    residence,
+    city} = user;
+
 if(!email || !password)
 {
     res.status(422).json({err:"incomplete fields"});
@@ -20,13 +28,21 @@ User.findOne({email:email})
     bcrypt.hash(password,12)
     .then(hashed=>{
         const user=new User({
-            email:email,
+            email,
             password:hashed,
-            name:name
+            name,
+            dob,
+            number,
+            state,
+            country,
+            pin,
+            residence,
+            city,
+            role
         })
         user.save()
         .then(response=>{
-            res.json({success:"saved successfully"});
+            res.json({success:"you are successfully registered"});
         })
         .catch(err=>{
             res.json({err:err})
@@ -40,6 +56,8 @@ User.findOne({email:email})
 .catch(err=>{
     res.json({err:err})
 })
-})
+}
 
-module.exports=router;
+module.exports={
+    uservalidation
+};

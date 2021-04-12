@@ -5,16 +5,14 @@ const User=mongoose.model("User");
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken')
 const {JWT_SECRET}=require('../config');
-const verify=require('../middleware');
+const verify=require('../middleware/middleware');
 
-router.get("/dashboard",verify,(req,res)=>{
-    res.send("hello user");
-})
-router.post("/signin",(req,res)=>{
-const {email,password,name} = req.body;
+
+const userlogin=(user,role,res)=>{
+const {email,password} = user;
 if(!email || !password)
 {
-    res.status(422).json({err:"incomplete fields"});
+    return res.status(422).json({err:"incomplete fields"});
 }
 User.findOne({email:email})
 .then(getuser=>{
@@ -22,12 +20,16 @@ User.findOne({email:email})
     {
         return res.status(422).json({err:"user doesn't exist wrong email"});
     }
+    // if(getuser.role!==role)
+    // {
+    //     return res.status(401).json({err:"Login into right field"});
+    // }
     bcrypt.compare(password,getuser.password)
     .then(status=>{
         if(status)
         {
-            const token=jwt.sign({_id:getuser._id},JWT_SECRET)
-            res.json({token:token});
+            const token=jwt.sign({_id:getuser._id},JWT_SECRET,{ expiresIn: '1h' })
+            res.json({token:token,user:getuser});
         }
         else{
             return res.status(422).json({err:"password wrong"});
@@ -41,6 +43,8 @@ User.findOne({email:email})
 .catch(err=>{
     res.json({err:err})
 })
-})
+}
 
-module.exports=router;
+module.exports={
+    userlogin
+};
