@@ -12,9 +12,10 @@ export default function Campus() {
    const [country,setcountry]=useState('');
    const [residence,setresidence]=useState('');
    const [password,setpassword]=useState('');
-   
+   const [submit,setsubmit]=useState('submit')
    function onsubmit(e)
 {
+  setsubmit('loading...')
     e.preventDefault();
     // console.log(dob + residence + number);
   fetch("http://localhost:4000/api/users/campus-register",{
@@ -38,7 +39,8 @@ export default function Campus() {
   .then(res=>res.json())
   .then(data=>{
    console.log(data);
-    // alert(data.success+"a campus ambassador");
+   setsubmit('submit'); 
+   alert(data.success+"a campus ambassador");
   })
   .catch(err=>{
       console.log(err);
@@ -48,36 +50,40 @@ export default function Campus() {
 const labelstyle={
 display:'block',   
 textTransform:'capitalize',
-fontSize:'17px'
+fontSize:'17px',
+marginLeft:'10px',
+color:'#333'
 }   
 
 const blockstyle={
 background:'#fff',
 width:'50%',
 margin:'auto',
-borderRadius:'30px',
-padding:'30px',
-boxShadow: '9px 9px 14px -7px rgba(0,0,0,0.75)'
+border:'1px solid #ddd',
+borderRadius:'5px',
+padding:'10px 5px',
+boxShadow: '5px 5px 14px -7px rgba(0,0,0,0.75)'
 }
 
 const fieldstyle={
     width:'90%',
     padding:'0px 20px',
     height:"30px",
-    borderBottom:'2px solid #0006',
+    // borderBottom:'2px solid #0007',
     border:'1px solid transparent',
     outline:'none',
     display:'block',
-
+    margin:'auto',
+    // background:'#ddd'
 }
 
    return (
-       <div style={{background:'rgb(248,248,255)',height:'100%'}}>
+       <div style={{background:'#fff',height:'100%'}}>
        
          {/* name */}
          <div style={blockstyle}>
             <div style={{}}>            
-             <label for="fname" style={labelstyle}>Fill This Form</label> <br />
+             <h5 style={{textDecoration:'underline',textDecorationStyle:'wavy',fontSize:'20px',textAlign:'center',fontWeight:'normal',color:'#333'}}>Fill This Form</h5> <br />
              </div>
        </div><br />
 
@@ -160,8 +166,8 @@ const fieldstyle={
              <input type="text" id="fname" name="fname" placeholder="Your Residence" onChange={(e)=>setresidence(e.target.value)} style={fieldstyle} /><br /> <br />
              </div>
        </div><br />
-
-       <input type="submit" value="submit" onClick={onsubmit} style={{height:'35px',width:'40%',background:'#FFFF00',font:'35px',fontWeight:'bolder',outline:'none',borderRadius:'30px',border:'1px solid transparent',display:'block',margin:'auto'}}/>
+0
+       <input type="submit" value={submit} onClick={onsubmit} style={{height:'35px',width:'40%',background:'#FFFF00',font:'35px',fontWeight:'bolder',outline:'none',borderRadius:'30px',border:'1px solid transparent',display:'block',margin:'auto'}}/>
         <br /><br /> 
        </div>
     )

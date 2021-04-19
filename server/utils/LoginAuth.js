@@ -29,7 +29,7 @@ User.findOne({email:email})
         if(status)
         {
             const token=jwt.sign({_id:getuser._id},JWT_SECRET,{ expiresIn: '1h' })
-            res.json({token:token,user:getuser});
+           res.json({token:token,user:getuser});
         }
         else{
             return res.status(422).json({err:"password wrong"});
