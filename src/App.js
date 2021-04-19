@@ -7,12 +7,12 @@ import {
   Link
 } from "react-router-dom";
 import Login from './pages/Auth/Login'
-import Dashboard from './Dashboard'
-import Form from './From'
-import AdminTask from './AdminTask'
-import CampusTask from './CampusTaskPanel'
-import AdminSub from './AdminSubmission'
-import CaSub from './CaSubmission'
+import Dashboard from './pages/Dashboard/Dashboard'
+import Form from './components/CampusForm/From'
+import AdminTask from './pages/Admin/AdminTask'
+import CampusTask from './pages/Campus/CampusTaskPanel'
+import AdminSub from './pages/Admin/AdminSubmission'
+import CaSub from './pages/Campus/CaSubmission'
 function App() {
   return (
     <div className="App">
@@ -41,12 +41,7 @@ function App() {
 
          
 
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <Route exact path="/form">
-            <Form />
-          </Route>
+         
         </Switch>
       </div>
     </Router>

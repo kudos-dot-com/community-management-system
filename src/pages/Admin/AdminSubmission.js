@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useRef} from 'react'
-import Sidebar from './Sidebar'
+import Sidebar from '../../components/Sidebar/Sidebar'
 import {useLocation,useHistory,Link} from 'react-router-dom'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -55,6 +55,7 @@ function AdminSubmission() {
     console.log(err);
   })
 }   
+    //form style 
     const labelstyle={
     display:'block',   
     textTransform:'capitalize',
@@ -75,6 +76,7 @@ function AdminSubmission() {
         margin:'auto',
         background:'#ddd'
     }
+    // --------------------------
     function Tasks()
     {
         return (
@@ -115,6 +117,7 @@ function AdminSubmission() {
             </div>
         )
     }
+    //filter form
     function Filter()
     {
         return (

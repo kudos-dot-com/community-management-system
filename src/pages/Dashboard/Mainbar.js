@@ -2,8 +2,7 @@ import React,{useEffect,useState} from 'react'
 import {useLocation,useHistory,Link} from 'react-router-dom'
 export default function Mainbar() {
    const [user,setuser]=useState({});
-   const location=useLocation();
-//    console.log(location.pathname)  
+   const location=useLocation();  
    useEffect(()=>{
     setuser(JSON.parse(localStorage.getItem('user')));
 
