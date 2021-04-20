@@ -3,7 +3,7 @@ const {ObjectId}=mongoose.Schema.Types;
 const TaskSchema= new mongoose.Schema({
     title:{
         type:String,
-        required:true
+        required:true,
     },
     description:{
         type:String,
@@ -38,7 +38,6 @@ const TaskSchema= new mongoose.Schema({
         type:ObjectId,
         ref:"User"
     }
-
 },
 {
     timestamps:true

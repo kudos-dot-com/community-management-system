@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "build":"cd.. && npm run build",
+    "build": "cd.. && npm run build",
     "install": "cd.. && npm install",
-    "heroku":"npm run install && npm run build"
+    "heroku": "npm run install && npm run build"
   },
   "author": "bhaskar",
   "license": "ISC",

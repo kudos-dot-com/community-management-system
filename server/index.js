@@ -10,25 +10,24 @@ const port=process.env.PORT || PORT;
 app.use(cors())
 app.use(require('express').json());
 
+//Routes;
+const SignUpRoute = require('./routes/signup');
+const SignInRoute = require('./routes/login');
+const DashBoardRoute = require('./routes/dashboard');
+const TaskRoute = require('./routes/Taskroute');
+
 //routes middle ware
-app.use('/api/users',require('./routes/signup'));
-app.use('/api/users',require('./routes/login'));
-app.use('/api/users',require('./routes/dashboard'));
-app.use('/tasks',require('./routes/Taskroute'));
-
-
-console.log(MONGO_URI)
+app.use('/api/users', SignUpRoute);
+app.use('/api/users', SignInRoute);
+app.use('/api/users', DashBoardRoute);
+app.use('/tasks', TaskRoute);
 
 mongoose.connect(process.env.MONGO_URI || MONGO_URI,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 })
-mongoose.connection.on('connected',()=>{
-    console.log("database connected");
-})
-mongoose.connection.on('err',()=>{
-    console.log("error connecting to database",err);
-})
+.then(()=>console.log("DataBase Connected"))
+.catch(err => console.log(err));
 
 if(process.env.NODE_ENV === 'production')
 {

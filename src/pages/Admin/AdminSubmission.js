@@ -1,21 +1,14 @@
 import React,{useEffect,useState,useRef} from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
-import {useLocation,useHistory,Link} from 'react-router-dom'
-import Modal from 'react-bootstrap/Modal'
+import {Link} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 function AdminSubmission() {
-    const FormModal=useRef(null);
     const [user,setuser]=useState({});
-    const location=useLocation();
     const [task,settask]=useState([]);
     const [status,setstatus]=useState("")
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     useEffect(()=>{
         setuser(JSON.parse(localStorage.getItem('user')));
         fetch('http://localhost:4000/tasks/get-ca-task')
