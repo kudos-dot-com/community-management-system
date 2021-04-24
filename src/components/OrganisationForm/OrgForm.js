@@ -3,17 +3,19 @@ import Form from 'react-bootstrap/Form'
 import './form.css'
 import CountryData from '../../CountryStateList'
 
-export default function Campus() {
+export default function OrgForm() {
    const [toggle,settoggle]=useState(false);
    const [name,setname]=useState('');
+   const [role,setrole]=useState(["Non-Profit","Profit","Private","Public","College Group","unregistered","Others"]);
    const [email,setemail]=useState('');
-   const [dob,setdob]=useState('');
+   const [website,setwebsite]=useState('');
    const [number,setnumber]=useState('');
    const [city,setcity]=useState('');
-   const [pin,setpin]=useState('');
+   const [type,setType]=useState('');
    const [state,setstate]=useState('');
    const [country,setcountry]=useState('');
-   const [residence,setresidence]=useState('');
+   const [description,setdescription]=useState('');
+   const [scope,setscope]=useState('');
    const [password,setpassword]=useState('');
    const [submit,setsubmit]=useState('submit')
    const [countries,setallcountries]=useState([{}])
@@ -32,16 +34,16 @@ useEffect(()=>{
  if(FOUND)
  {
      setallstates(FOUND.states);
-    // console.log(FOUND.states)
  }
 },[selectCountry])
 
+// name country state email website pawword description(area) scope of work(area) {type of org}(non profit,pvt,public,profit,college club,unregistered) social media link,contact no
    function onsubmit(e)
 {
   setsubmit('loading...')
     e.preventDefault();
     // console.log(dob + residence + number);
-  fetch("http://localhost:4000/api/users/admin-register-ca",{
+  fetch("http://localhost:4000/api/users/admin-register-org",{
       method:"post",
       headers:{
           "Content-Type":"application/json",
@@ -51,12 +53,13 @@ useEffect(()=>{
           password,
           email,
           name,
-          dob,
+          website,
           number,
           state,
           country:selectCountry,
-          pin,
-          residence,
+          type,
+          description,
+          scope,
           city,
       })
   })
@@ -64,13 +67,13 @@ useEffect(()=>{
   .then(data=>{
    console.log(data);
    setsubmit('submit'); 
-   alert(data.success+"a campus ambassador");
+   alert(data.success+"an organisation");
   })
   .catch(err=>{
       console.log(err);
   })
 }
-
+console.log(type)
 const labelstyle={
 display:'block',   
 textTransform:'capitalize',
@@ -90,7 +93,6 @@ const fieldstyle={
     // background:'#ddd'
 }
 
-
    return (
        <div style={{background:'#fff',height:'100%'}}>
        
@@ -103,7 +105,7 @@ const fieldstyle={
       
         <div style={{display:'flex'}} id="blockstyle">
           <Form.Group  id="blockstyle" controlId="formBasicEmail">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Organisation Name</Form.Label>
             <Form.Control type="text" onChange={(e)=>setname(e.target.value)} placeholder="Enter Name" />
           </Form.Group>
 
@@ -117,18 +119,17 @@ const fieldstyle={
             <Form.Label>password</Form.Label>
             <Form.Control type="text" placeholder="Enter password"  onChange={(e)=>setpassword(e.target.value)} />
           </Form.Group>
-         <div className="d-flex" id="blockstyle">
+         <div className="d-flex justify-content-start" id="blockstyle">
           {/*  Date of Birth*/}
-          <div id="blockstyle" className="md-form md-outline input-with-post-icon datepicker">
-          {/* <br /> */}
-          <label for="fname" style={labelstyle}>Date Of Birth</label> 
-            <input type="date" id="blockstyle" id="birthday" name="birthday" onChange={(e)=>setdob(e.target.value)} />
-          </div>
+          <Form.Group  id="blockstyle" controlId="formBasicEmail">
+            <Form.Label>Website URL</Form.Label>
+            <Form.Control type="text" placeholder="Your Website URL" onChange={(e)=>setwebsite(e.target.value)}/>
+        </Form.Group>   
         
        {/* wp number */}
        <Form.Group  id="blockstyle" controlId="formBasicEmail">
-            <Form.Label>Whatsapp Number</Form.Label>
-            <Form.Control type="email" placeholder="Your Whatsapp Number" onChange={(e)=>setnumber(e.target.value)}/>
+            <Form.Label>Contact Number</Form.Label>
+            <Form.Control type="text" placeholder="Your Contact Number" onChange={(e)=>setnumber(e.target.value)}/>
         </Form.Group>
         </div>
 
@@ -140,10 +141,16 @@ const fieldstyle={
         </Form.Group>
 
        {/* pincode */}
-       <Form.Group  id="blockstyle" controlId="formBasicEmail">
-            <Form.Label>Pincode</Form.Label>
-            <Form.Control type="email" placeholder="Pincode" onChange={(e)=>setpin(e.target.value)}/>
-        </Form.Group>
+        <div id="blockstyle">
+          <label for="cars">Type Of Organisation:</label>
+             <br /> 
+             <select  id="filterBody" onChange={(e)=>setType(e.target.value)}>
+               {role.map(data=>{
+                  return(
+                    <option eventKey="1"  value={data}  >{data}</option>
+                    );
+                    })} 
+                  </select></div>
         </div>
          
         <div className="d-flex" id="blockstyle">
@@ -172,8 +179,14 @@ const fieldstyle={
                    </div>
 
                    <Form.Group  id="blockstyle" controlId="formBasicEmail">
-                      <Form.Label>Residence: Hostel/City</Form.Label>
-                         <Form.Control as="textarea" rows={3} placeholder="Your Residence" onChange={(e)=>setresidence(e.target.value)} />
+                      <Form.Label>Description</Form.Label>
+                         <Form.Control as="textarea" rows={3} placeholder="Brief Dscription About Your Organisation" onChange={(e)=>setdescription(e.target.value)} />
+                      </Form.Group>
+                      <br></br>
+                     
+                     <Form.Group  id="blockstyle" controlId="formBasicEmail">
+                      <Form.Label>Scope Of Work</Form.Label>
+                         <Form.Control as="textarea" rows={3} placeholder="What Do Your Organisation Do And Aims At" onChange={(e)=>setscope(e.target.value)} />
                       </Form.Group>
          
 

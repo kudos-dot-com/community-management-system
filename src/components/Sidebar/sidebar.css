@@ -9,6 +9,7 @@
 }
 #link:hover{
     background: #dedede;;
+    text-decoration:none;
   }
 .link{
     text-decoration:none;

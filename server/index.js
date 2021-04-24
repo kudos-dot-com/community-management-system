@@ -4,18 +4,26 @@ const mongoose=require('mongoose');
 const {MONGO_URI,PORT}=require('./config');
 const cors=require("cors");
 require('./models/User');
+require('./models/Organisation');
 require('./models/Task')
+require('./models/OrgTask');
+
 const port=process.env.PORT || PORT;
 
 app.use(cors())
 app.use(require('express').json());
 
-//routes middle ware
-app.use('/api/users',require('./routes/signup'));
-app.use('/api/users',require('./routes/login'));
-app.use('/api/users',require('./routes/dashboard'));
-app.use('/tasks',require('./routes/Taskroute'));
+//Routes;
+const SignUpRoute = require('./routes/signup');
+const SignInRoute = require('./routes/login');
+const DashBoardRoute = require('./routes/dashboard');
+const TaskRoute = require('./routes/Taskroute');
 
+//routes middle ware
+app.use('/api/users', SignUpRoute);
+app.use('/api/users', SignInRoute);
+app.use('/api/users', DashBoardRoute);
+app.use('/tasks', TaskRoute);
 
 console.log(MONGO_URI)
 

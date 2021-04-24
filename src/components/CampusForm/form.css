@@ -1,0 +1,13 @@
+#blockstyle
+{
+background:transparent;
+width:50%;
+display:block;
+margin:auto;
+padding:5px
+}
+#filterBody{
+    display:inline-block;
+    padding:10px;
+    margin:5px 0px;
+}

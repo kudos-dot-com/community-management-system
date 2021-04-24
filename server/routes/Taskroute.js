@@ -1,6 +1,10 @@
 const router=require("express").Router();
-let {addTask , fetchTask, findTask , updateTask }=require('../utils/SetTask') //functions for different operartion
-const verify=require('../middleware/middleware'); //used to verify that token is provided or not
+let {addTask , 
+    fetchTask, 
+    findTask , 
+    updateTask }=require('../utils/SetTask') //functions for different operartion
+
+const {verify}=require('../middleware/middleware'); //used to verify that token is provided or not
 
 
 // adding new task routes 
@@ -35,7 +39,7 @@ router.get('/get-ca-task',(req,res)=>{
 
     fetchTask('campus-ambassador',res)
 })
-// --------------------------------------------------------------------------------------
+// <-------------------------------------------------------------------------------------->
 
 // finding specific routes
 router.get('/ca-find-task',verify,(req,res)=>{

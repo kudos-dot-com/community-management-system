@@ -60,12 +60,12 @@ function CaSubmission() {
                                 <td style={tableStyle}>{data.title}</td>
                                 <td style={tableStyle}>{data.description}</td>
                                
-                                <td style={tableStyle}><Link to={{ pathname:`${data.media}` }} target="_blank" ><Button>Click Here</Button></Link></td>
+                                <td style={tableStyle}><Link to={{ pathname:`${data.media}` }} target="_blank" ><Button className="btn btn-info">Click Here</Button></Link></td>
                                 <td style={tableStyle}>{data.points}</td>
                                 <td style={tableStyle}>{data.PointsGained}</td>
                                 <td style={tableStyle}>{data.status}</td>
                                 <td style={tableStyle}>{data.updatedAt}</td>
-                                <td style={tableStyle}><button  onClick={handleShow} className="btn modal-trigger waves-effect waves-light btn">Edit</button>
+                                <td style={tableStyle}><button  onClick={handleShow} className="btn btn-info">Edit</button>
                                 </td>
 
                             </tr>

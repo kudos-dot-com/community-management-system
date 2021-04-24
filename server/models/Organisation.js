@@ -1,17 +1,9 @@
 // this collection is for the campus ambasador registed by admin
 const mongoose=require('mongoose');
-const userSchema= new mongoose.Schema({
+const orgSchema= new mongoose.Schema({
     status:{
         type:String,
         default:'Active',
-        required:false
-    },
-    addedByAdmin:{
-        type:String,
-        required:false
-    },
-    addedByOrg:{
-        type:String,
         required:false
     },
     name:{
@@ -26,19 +18,11 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:true
     },
-    dob:{
+    website:{
         type:String,
         required:true
     },
     number:{
-        type:String,
-        required:true
-    },
-    city:{
-        type:String,
-        required:true
-    },
-    pin:{
         type:String,
         required:true
     },
@@ -50,7 +34,19 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:true
     },
-    residence:{
+    type:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    scope:{
+        type:String,
+        required:true
+    },
+    city:{
         type:String,
         required:true
     },
@@ -65,4 +61,4 @@ const userSchema= new mongoose.Schema({
 }
 );
 
-mongoose.model('User',userSchema);
+mongoose.model('Organisation',orgSchema);

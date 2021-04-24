@@ -12,7 +12,7 @@ export default function Sidebar()
     },[])
 
         return (
-            <div style={{height:'100vh',width:'100%',background:'#fff'}}>
+            <div style={{height:'200vh',width:'100%',background:'#fff'}}>
 
               <ul>
                   {/* dashboard route */}
@@ -21,7 +21,9 @@ export default function Sidebar()
                 </Link>
 
                 {/* these routes are not in use */}
-                  <li id="link" style={{color:'#7B7B7C'}}>college</li>
+                <Link to="/admin/AddOrganisation" className="link">
+                  <li id="link" style={{color:location.pathname==='/admin/AddOrganisation'?'#1e90ff':'#7B7B7C',display:user.role==='admin'?"block":"none"}}>Add Organisation</li>
+                  </Link>
                   <li id="link" style={{color:'#7B7B7C'}}>courses</li>
                   
                   <Link to="/campus" className="link" >
