@@ -1,5 +1,6 @@
 // this collection is for the campus ambasador registed by admin
 const mongoose=require('mongoose');
+const {ObjectId}=mongoose.Schema.Types;
 const userSchema= new mongoose.Schema({
     status:{
         type:String,
@@ -11,8 +12,9 @@ const userSchema= new mongoose.Schema({
         required:false
     },
     addedByOrg:{
-        type:String,
-        required:false
+        required:false,
+        type:ObjectId,
+        ref:"Organisation"
     },
     name:{
         type:String,

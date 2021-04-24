@@ -7,8 +7,8 @@ import CountryData from '../../CountryStateList'
 import Button from 'react-bootstrap/Button'
 
 function OrgFilter() {
-    const [user,setuser]=useState([]);
-    const [status,setstatus]=useState(["ACTIVE","DEACTIVATED"]);
+    const [user,setuser]=useState(['No Campus Ambassador Found']);
+    const [status,setstatus]=useState([]);
     const [role,setrole]=useState(["Non-Profit","Profit","Private","Public","College Group","unregistered","Others"]);
     const [campusrole,getrole]=useState("");
     const [city,setcity]=useState("");
@@ -91,9 +91,9 @@ function OrgFilter() {
                         <th style={tableStyle}>Website URL</th>
                         <th style={tableStyle}>Action</th>
                      </tr>
+                     
                 {
-                    user
-                    .filter((val=>{
+                    user.filter((val=>{
                         if(campusrole==="" && selectCountry==="" && state==="")
                         { return val }
 
@@ -186,6 +186,7 @@ function OrgFilter() {
                 <br />
 
                     <div style={{width:'100%',display:'block',background:'#fff',padding:"10px"}}>
+                        
                         <Tasks />   
                     </div>
                 </div>

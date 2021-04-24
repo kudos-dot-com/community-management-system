@@ -16,6 +16,10 @@ function App() {
     <div className='App'>
       <Switch>
         <Route exact path='/' render ={ () => is_logged ? <Redirect to ='/' /> : <Login />} />
+
+        <Route exact path='/login' >
+        <Login />
+        </Route>
         <Route exact path='/form' render ={ () => is_logged ? <Form />:<Redirect to ='/' />} />
         <Route exact path='/organisation-form' render ={ () => is_logged ? <OrgForm />:<OrgForm />} />
 

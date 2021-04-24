@@ -19,16 +19,9 @@ function CampusUsers() {
     const [countries,setallcountries]=useState([{}])
     const [selectCountry,setSelectedCountry]=useState("");
     const [allstates,setallstates]=useState([])
-    const [usertoken,setuserfromtoken]=useState({});
-    const [endpoint,setendpoint]=useState("");
     useEffect(()=>{
-       
-    },[])
-    useEffect(()=>{
-        setuserfromtoken(JSON.parse(localStorage.getItem('user')));
-        console.log(endpoint);
-        fetch(`http://localhost:4000/api/users/get-campus-user`,{    
-        headers:{
+        fetch('http://localhost:4000/api/users/org-get-campus-user',{
+            headers:{
                 Authorization:"Bearer "+localStorage.getItem("token")
             }
         })
@@ -43,8 +36,9 @@ function CampusUsers() {
         })
         setallcountries(CountryData.countries); 
         console.log();
-    
-},[endpoint])
+        
+       
+    },[])
     useEffect(()=>{
         var FOUND = countries.find(function(post, index) {
             if(post.country === selectCountry)
@@ -98,6 +92,7 @@ function CampusUsers() {
                         <th style={tableStyle}>residence</th>
                         <th style={tableStyle}>Action</th>
                      </tr>
+                     {user.length===0?<p style={{marginTop:'15px',textAlign:'center',Fontweight:'thinner',fontSize:'19px',color:'#0006'}}>No Campus Ambassador Found</p>:""}
                 {
                     user
                     .filter((val=>{

@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Form from 'react-bootstrap/Form'
 import './form.css'
 import CountryData from '../../CountryStateList'
+import { useHistory } from 'react-router';
 
 export default function Campus() {
    const [toggle,settoggle]=useState(false);
@@ -19,10 +20,17 @@ export default function Campus() {
    const [countries,setallcountries]=useState([{}])
    const [selectCountry,setSelectedCountry]=useState("");
    const [allstates,setallstates]=useState([])
+   const [user,setuser]=useState({});
+   const [endpoint,setendpoint]=useState("");
+   const history = useHistory();
+
    useEffect(()=>{
-    setallcountries(CountryData.countries); 
-    console.log();
+    setuser(JSON.parse(localStorage.getItem('user')));
+     setallcountries(CountryData.countries); 
+    user.role==="admin"?setendpoint("/admin-register-ca"):setendpoint("/org-register-ca");
+   
   },[])
+
 useEffect(()=>{
     var FOUND = countries.find(function(post, index) {
         if(post.country === selectCountry)
@@ -41,7 +49,7 @@ useEffect(()=>{
   setsubmit('loading...')
     e.preventDefault();
     // console.log(dob + residence + number);
-  fetch("http://localhost:4000/api/users/admin-register-ca",{
+  fetch(`http://localhost:4000/api/users/${endpoint}`,{
       method:"post",
       headers:{
           "Content-Type":"application/json",
@@ -65,6 +73,7 @@ useEffect(()=>{
    console.log(data);
    setsubmit('submit'); 
    alert(data.success+"a campus ambassador");
+   history.push('/dashboard');
   })
   .catch(err=>{
       console.log(err);
