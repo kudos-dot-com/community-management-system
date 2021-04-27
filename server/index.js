@@ -27,18 +27,18 @@ app.use('/api/users', DashBoardRoute);
 app.use('/tasks', TaskRoute);
 app.use('/Orgtasks', OrgTaskRoute);
 
-console.log(MONGO_URI)
+//routes middle ware
+app.use('/api/users', SignUpRoute);
+app.use('/api/users', SignInRoute);
+app.use('/api/users', DashBoardRoute);
+app.use('/tasks', TaskRoute);
 
 mongoose.connect(process.env.MONGO_URI || MONGO_URI,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 })
-mongoose.connection.on('connected',()=>{
-    console.log("database connected");
-})
-mongoose.connection.on('err',()=>{
-    console.log("error connecting to database",err);
-})
+.then(()=>console.log("DataBase Connected"))
+.catch(err => console.log(err));
 
 if(process.env.NODE_ENV === 'production')
 {

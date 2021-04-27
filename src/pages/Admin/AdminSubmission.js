@@ -5,9 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 function AdminSubmission() {
-    const FormModal=useRef(null);
     const [user,setuser]=useState({});
-    const location=useLocation();
     const [task,settask]=useState([]);
     const [reftask,setRefTask]=useState([]);
     const [status,setstatus]=useState("")
