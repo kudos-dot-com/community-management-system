@@ -28,15 +28,24 @@ const OrgTaskSchema= new mongoose.Schema({
        default:"not approved",
        required:false 
     },
+    task_id:{
+        type:String,
+        required:false
+    },
    role:{
         type:String,
         required:true,
         enum:["campus-ambassador","voulenteer","country-ambassador","organisation","admin"]
     },
-    user:{
+    org:{
         required:false,
         type:ObjectId,
         ref:"Organisation"
+    },
+    user:{
+        required:false,
+        type:ObjectId,
+        ref:"User"
     }
 
 },

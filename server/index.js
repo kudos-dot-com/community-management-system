@@ -18,12 +18,14 @@ const SignUpRoute = require('./routes/signup');
 const SignInRoute = require('./routes/login');
 const DashBoardRoute = require('./routes/dashboard');
 const TaskRoute = require('./routes/Taskroute');
+const OrgTaskRoute = require('./routes/TaskrouteByOrg');
 
 //routes middle ware
 app.use('/api/users', SignUpRoute);
 app.use('/api/users', SignInRoute);
 app.use('/api/users', DashBoardRoute);
 app.use('/tasks', TaskRoute);
+app.use('/Orgtasks', OrgTaskRoute);
 
 console.log(MONGO_URI)
 

@@ -1,8 +1,7 @@
 // organisation task
-
 const express=require('express');
 const mongoose=require('mongoose');
-const Task=mongoose.model('OrgTask');
+const OrgTask=mongoose.model('OrgTask');
 const verify=require('../middleware/middleware');
 
 const addTask=(req,role,res,userdets)=>{
@@ -17,10 +16,11 @@ console.log(role);
             return res.json({success:"please fill all the fields"})
         }        
             
-          const task=new Task({
+          const task=new OrgTask({
             title,
             description,
             points,
+            org:userdets,
             role
         });
 
@@ -35,20 +35,21 @@ console.log(role);
 
     if(role==='campus-ambassador')
     {
-        const {title,description,points,media}=req.body;
+        const {title,description,points,media,addedBy}=req.body;
 
         if(!title || !description || !points || !media)
         {
             return res.json({success:"please fill all the fields"})
         }
    
-        task=new Task({
+        task=new OrgTask({
             title,
             description,
             points,
             media,
             role,
-            user:userdets
+            user:userdets,
+            task_id:addedBy
         });
         
         task.save()
@@ -67,17 +68,45 @@ console.log(role);
 
 // get the tasks
 
-const fetchTask=(role,res)=>{
-
-    Task.find({role:role})
+const fetchTask=(req,role,res,user)=>{
+    // const {addedBy}=req.body;
+    console.log(user);
+    if(role==='organisation'){
+    OrgTask.find({org:user.addedBy})
     .sort({createdAt:-1 })
-    .populate("user")
+    // .populate("user")
     .then(response=>{
         res.json({success:response})
     })
     .catch(err=>{
         res.json({err:err})
     })
+    }
+    else if(role==='campus-ambassador')
+    {
+        OrgTask.find({task_id:user._id,role:role})
+        .sort({createdAt:-1 })
+        // .populate("user")
+        .then(response=>{
+            res.json({success:response})
+        })
+        .catch(err=>{
+            res.json({err:err})
+        })  
+    }
+}
+
+const OrgFetchTask=(req,res,user)=>{
+    //   const {addedBy}=req.body;
+        OrgTask.find({task_id:user._id})
+        .sort({createdAt:-1 })
+        // .populate("user")
+        .then(response=>{
+            res.json({success:response})
+        })
+        .catch(err=>{
+            res.json({err:err})
+        })  
 }
 
 const findTask=(user,role,res)=>{
@@ -117,5 +146,6 @@ module.exports={
     addTask,
     fetchTask,
     findTask,
-    updateTask
+    updateTask,
+    OrgFetchTask   
 }
