@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 
 function OrgFilter() {
     const [user,setuser]=useState(['No Campus Ambassador Found']);
-    const [status,setstatus]=useState([]);
+    const [status,setstatus]=useState(['Active','Inactive']);
     const [role,setrole]=useState(["Non-Profit","Profit","Private","Public","College Group","unregistered","Others"]);
     const [campusrole,getrole]=useState("");
     const [city,setcity]=useState("");

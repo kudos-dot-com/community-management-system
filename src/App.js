@@ -9,6 +9,10 @@ import AdminAddOrg from "./pages/Admin/AdminAddOrg"
 import CampusTask from "./pages/Campus/CampusTaskPanel";
 import AdminSub from "./pages/Admin/AdminSubmission";
 import CaSub from "./pages/Campus/CaSubmission";
+import OrgSub from "./pages/Organisation/OrganisationSubmission"
+import OrgTask from "./pages/Organisation/OrganisationTask"
+import AddTask from "./pages/AddTask/AddTask"
+
 import { useSelector } from "react-redux";
 function App() {
   const is_logged = useSelector(state => state.is_logged);
@@ -18,9 +22,11 @@ function App() {
         <Route exact path='/' render ={ () => is_logged ? <Redirect to ='/' /> : <Login />} />
 
         <Route exact path='/login' >
-        <Login />
+          <Login />
         </Route>
         <Route exact path='/form' render ={ () => is_logged ? <Form />:<Redirect to ='/' />} />
+        <Route exact path='/Addtask' render ={ () => is_logged ? <AddTask />:<Redirect to ='/' />} />
+
         <Route exact path='/organisation-form' render ={ () => is_logged ? <OrgForm />:<OrgForm />} />
 
         <Route exact path='/dashboard' render={ () => is_logged ? <Dashboard /> :<Redirect to ='/' />} />
@@ -30,6 +36,11 @@ function App() {
         <Route path='/ca/yoursubmission' render={ () =>  is_logged ? <CaSub /> :<Redirect to ='/' />} />
         <Route exact path='/admin/addtask' render={ () => is_logged ? <AdminTask /> :<Redirect to ='/' />} />
         <Route exact path='/admin/submissions' render={ () => is_logged ? <AdminSub /> :<Redirect to ='/' />} />
+
+        <Route exact path='/organisation/addtask' render={ () => is_logged ? <OrgTask /> :<Redirect to ='/' />} />
+        <Route exact path='/organisation/submissions' render={ () => is_logged ? <OrgSub /> :<Redirect to ='/' />} />
+      
+      
       </Switch>
     </div>
   );

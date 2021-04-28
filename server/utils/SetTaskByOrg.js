@@ -49,7 +49,7 @@ console.log(role);
             media,
             role,
             user:userdets,
-            task_id:addedBy
+            task_id:userdets.addedByOrg
         });
         
         task.save()
@@ -69,10 +69,10 @@ console.log(role);
 // get the tasks
 
 const fetchTask=(req,role,res,user)=>{
-    // const {addedBy}=req.body;
+  
     console.log(user);
     if(role==='organisation'){
-    OrgTask.find({org:user.addedBy})
+    OrgTask.find({org:user.addedByOrg})
     .sort({createdAt:-1 })
     // .populate("user")
     .then(response=>{
@@ -86,7 +86,7 @@ const fetchTask=(req,role,res,user)=>{
     {
         OrgTask.find({task_id:user._id,role:role})
         .sort({createdAt:-1 })
-        // .populate("user")
+        .populate("user")
         .then(response=>{
             res.json({success:response})
         })
@@ -111,9 +111,9 @@ const OrgFetchTask=(req,res,user)=>{
 
 const findTask=(user,role,res)=>{
     
-    Task.find({user:user._id})
+    OrgTask.find({org:user._id})
     .sort({createdAt:-1 })
-    .populate("user")
+    // .populate("user")
     .then(response=>{
         res.json({success:response})
     })

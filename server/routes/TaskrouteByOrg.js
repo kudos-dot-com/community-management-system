@@ -31,14 +31,14 @@ router.post('/voulenteer-add-task',verify,(req,res)=>{
 // ---------------------------------------------------------------------------------------
 
 // get respective tasks routes
-router.post('/get-org-task',verify,(req,res)=>{
+router.get('/get-org-task',verify,(req,res)=>{
 
-    fetchTask(req,res,req.user)
+    fetchTask(req,'organisation',res,req.user)
 })
 
 router.get('/get-ca-orgtask',verifyOrg,(req,res)=>{
 
-    fetchTask(req,res,req.user)
+    fetchTask(req,'campus-ambassador',res,req.user)
 })
 // <-------------------------------------------------------------------------------------->
 
@@ -48,6 +48,11 @@ router.get('/ca-find-task',verify,(req,res)=>{
    findTask(req.user,'campus-ambassador',res)
 
 })
+router.get('/org-find-task',verifyOrg,(req,res)=>{
+
+    findTask(req.user,'organisation',res)
+ 
+ })
 
 router.put('/ca-update-task',verify,(req,res)=>{
 

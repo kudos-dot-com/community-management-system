@@ -6,9 +6,13 @@ export default function Sidebar()
 {
     const location=useLocation();
     const [user,setuser]=useState({});
-
+    const route=[
+        {"admin":"/admin/addtask","campus-ambassador":"/ca/task","organisation":"/organisation/addtask"},
+        {"admin":"/admin/submissions","campus-ambassador":"/ca/yoursubmission","organisation":"/organisation/submissions"}
+    ]
+    console.log();
     useEffect(()=>{
-    setuser(JSON.parse(localStorage.getItem('user')));
+    setuser(JSON.parse(localStorage.getItem('user')).role);
     },[])
 
         return (
@@ -20,36 +24,38 @@ export default function Sidebar()
                     <li id="link" style={{color:location.pathname==='/dashboard'?'#1e90ff':'#7B7B7C'}}>dashboard</li>
                 </Link>
 
-                {/* these routes are not in use */}
+                {/* admin add organisation route */}
                 <Link to="/admin/AddOrganisation" className="link">
                   <li id="link" style={{color:location.pathname==='/admin/AddOrganisation'?'#1e90ff':'#7B7B7C',display:user.role==='admin'?"block":"none"}}>Add Organisation</li>
-                  </Link>
-                  <li id="link" style={{color:'#7B7B7C'}}>courses</li>
-                  
-                  <Link to="/campus" className="link" >
-                      <li id="link" style={{textDecoration:'none',color:'#7B7B7C',textTransform:'capitalize',padding:'15px 15px',fontSize:'15px',fontWeight:'normal'}}>college ambasador</li>
-                  </Link>
-                  
-                  {/* route to Admin task panel or ca task panel */}
-                  <Link to={user.role==='admin'?'/admin/addtask':'/ca/task'} className="link">
-                      <li id="link" style={{color:location.pathname==='/admin/addtask' || location.pathname==='/ca/task'?'#1e90ff':'#7B7B7C'}}>
+                </Link>
+
+                 
+                 {/* route to Admin task panel or ca task panel */}
+                  <Link to={route[0][user]} className="link">
+                      <li id="link" style={{color:location.pathname===route[0][user]?'#1e90ff':'#7B7B7C'}}>
                           {user.role==='admin'?`ca's task`:'My task'}
                       </li>
                   </Link>
                   
-                  {/*  these routes are not in use */}
-                  <li id="link" style={{textDecoration:'none',color:'#7B7B7C',textTransform:'capitalize',padding:'15px 15px',fontSize:'15px',fontWeight:'normal'}}>take action</li>
-                  
-                  {/* route to submission panel */}
+                  {/* route t0o submission panel */}
 
-                  <Link to={user.role==='admin'?'/admin/submissions':'/ca/yoursubmission'} className="link">
-                      <li id="link" style={{color:location.pathname==='/admin/submissions' || location.pathname==='/ca/yoursubmission'?'#1e90ff':'#7B7B7C'}} >
+                  <Link to={route[1][user]} className="link">
+                      <li id="link" style={{color:location.pathname===route[1][user]?'#1e90ff':'#7B7B7C'}} >
                           {user.role==='admin'?`submission`:'My submission'}
                       </li>                 
                   </Link>
                
-                {/* route not linked yet */}
+               {/* not in use */}
+               <li id="link" style={{textDecoration:'none',color:'#7B7B7C',textTransform:'capitalize',padding:'15px 15px',fontSize:'15px',fontWeight:'normal'}}>take action</li>
+
                   <li id="link" style={{textDecoration:'none',color:'#7B7B7C',textTransform:'capitalize',padding:'15px 15px',fontSize:'15px',fontWeight:'normal'}}>country ambasador</li>
+                    <li id="link" style={{color:'#7B7B7C'}}>courses</li>
+                  
+                    <Link to="/campus" className="link" >
+                      <li id="link" style={{textDecoration:'none',color:'#7B7B7C',textTransform:'capitalize',padding:'15px 15px',fontSize:'15px',fontWeight:'normal'}}>college ambasador</li>
+                  </Link>
+              
+              
               </ul>
 
             </div>

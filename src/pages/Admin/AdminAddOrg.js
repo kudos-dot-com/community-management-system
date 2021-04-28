@@ -25,9 +25,8 @@ function AdminAddOrg() {
                 
                 <br /><br />
 
-                {/* <div style={{width:'100%',display:'block',background:'#fff',padding:"10px"}}> */}
+               
                 <OrgPanel/>
-                {/* </div> */}
             <div >
             </div>               
         </div>

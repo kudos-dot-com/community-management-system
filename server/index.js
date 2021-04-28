@@ -25,7 +25,7 @@ app.use('/api/users', SignUpRoute);
 app.use('/api/users', SignInRoute);
 app.use('/api/users', DashBoardRoute);
 app.use('/tasks', TaskRoute);
-app.use('/Orgtasks', OrgTaskRoute);
+app.use('/tasks', OrgTaskRoute);
 
 //routes middle ware
 app.use('/api/users', SignUpRoute);

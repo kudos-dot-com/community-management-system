@@ -1,12 +1,12 @@
 import React,{useEffect,useState,useRef} from 'react'
 import SubmissionPage from '../../components/Task/SubmissionPage'
-function AdminSubmission() {
+function OrgSubmission() {
       
     return (
     <div>
-          <SubmissionPage url={'http://localhost:4000/tasks/get-ca-task'}/>  
+          <SubmissionPage url={'http://localhost:4000/tasks/get-ca-orgtask'}/>  
     </div>
     )
 }
 
-export default AdminSubmission
+export default OrgSubmission

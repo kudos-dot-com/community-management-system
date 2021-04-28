@@ -59,7 +59,9 @@ function CampusTaskPanel() {
         }
 
         const tableStyle={
-            textAlign:"center"
+            textAlign:"center",
+            padding:'10px 0px',
+            borderBottom:'1px solid #ccc'
         }
     function Form()
     {
@@ -80,7 +82,7 @@ function CampusTaskPanel() {
         handleClose();
 
         // console.log(title.current.value + description.current.value + points.current.value);
-        fetch("http://localhost:4000/tasks/ca-add-task",{
+        fetch("http://localhost:4000/Orgtasks/ca-add-task",{
             method:"post",
             headers:{
                 "Content-Type":"application/json",
