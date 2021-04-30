@@ -19,7 +19,10 @@ function AddTaskPage(url) {
     useEffect(()=>{
         setloading("Loading...")
         setuser(JSON.parse(localStorage.getItem('user')));
-        fetch(url.url)
+        fetch(url.url,{  headers:{
+            Authorization:"Bearer "+localStorage.getItem("token")
+        }
+        })
         .then(response => response.json())
         .then(data =>{
             console.log(data);
@@ -119,9 +122,8 @@ function AddTaskPage(url) {
 
                      <div style={{width:'100%',display:'block',background:'#fff',padding:"10px"}}>
                         <pre>Your Posted Tasks</pre>
-                      {/* {task.length!==0?<Tasks />:""}    */}
+                      {task.length!==0?<Tasks />:""}   
                     </div>
-
                 </div>
       
             </div>

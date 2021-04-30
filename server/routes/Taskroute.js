@@ -15,7 +15,7 @@ router.post('/admin-add-task',verify,(req,res)=>{
 })
 
 
-router.post('/ca-add-task',verify,(req,res)=>{
+router.post('/ca-add-task-admin',verify,(req,res)=>{
 
     addTask(req,'campus-ambassador',res,req.user)
 

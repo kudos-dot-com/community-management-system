@@ -5,7 +5,8 @@ import CountryData from '../../CountryStateList'
 import { useHistory } from 'react-router';
 
 export default function Campus() {
-   const [toggle,settoggle]=useState(false);
+  const [user,setuser]=useState(JSON.parse(localStorage.getItem('user')));
+  const [toggle,settoggle]=useState(false);
    const [name,setname]=useState('');
    const [email,setemail]=useState('');
    const [dob,setdob]=useState('');
@@ -20,16 +21,18 @@ export default function Campus() {
    const [countries,setallcountries]=useState([{}])
    const [selectCountry,setSelectedCountry]=useState("");
    const [allstates,setallstates]=useState([])
-   const [user,setuser]=useState({});
    const [endpoint,setendpoint]=useState("");
    const history = useHistory();
 
    useEffect(()=>{
-    setuser(JSON.parse(localStorage.getItem('user')));
-     setallcountries(CountryData.countries); 
-    user.role==="admin"?setendpoint("/admin-register-ca"):setendpoint("/org-register-ca");
+    // setuser();
+    if(user) 
+  {
+      user.role==="admin"?setendpoint("/admin-register-ca"):setendpoint("/org-register-ca"); 
+  }
+   setallcountries(CountryData.countries); 
    
-  },[])
+  },[user])
 
 useEffect(()=>{
     var FOUND = countries.find(function(post, index) {
@@ -49,7 +52,10 @@ useEffect(()=>{
   setsubmit('loading...')
     e.preventDefault();
     // console.log(dob + residence + number);
-  fetch(`http://localhost:4000/api/users/${endpoint}`,{
+ if(!user){
+   return ;
+ }else{
+    fetch(`http://localhost:4000/api/users/${endpoint}`,{
       method:"post",
       headers:{
           "Content-Type":"application/json",
@@ -77,7 +83,7 @@ useEffect(()=>{
   })
   .catch(err=>{
       console.log(err);
-  })
+  })}
 }
 
 const labelstyle={

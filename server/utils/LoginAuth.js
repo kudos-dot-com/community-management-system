@@ -55,7 +55,6 @@ const orgLogin=(req,res,next)=>{
         if(!getuser)
         {   
            return next();
-           
         }
         bcrypt.compare(password,getuser.password)
         .then(status=>{

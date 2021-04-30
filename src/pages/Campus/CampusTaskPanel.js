@@ -7,35 +7,44 @@ import Button from 'react-bootstrap/Button'
 
 function CampusTaskPanel() {
     const FormModal=useRef(null);
-    const [user,setuser]=useState({});
+    const [user,setuser]=useState(JSON.parse(localStorage.getItem('user')));
     const location=useLocation();
     const [task,settask]=useState([]);
     const [data,usedata]=useState();
     const title=useRef("");
+    const [tagged,settag]=useState("");
+    // for modal
+    const [des,setdes]=useState("");
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
-    const handleShow = (data) =>
-    {   usedata(data);
-        // console.log(data);
+    const handleShow = (tag,data) =>
+    {   tag==="1"?setdes(data):usedata(data);
+        settag(tag);
         setShow(true);
     }
     useEffect(()=>{
-        setuser(JSON.parse(localStorage.getItem('user')));
-        
-        fetch('http://localhost:4000/tasks/get-admin-task')
+        const addedBy=user.addedByOrg?"organisation":"admin";
+        console.log(addedBy); 
+        if(!user)
+        {return;}
+        else
+        {
+        fetch(`http://localhost:4000/tasks/get-${addedBy}-task`,{    
+            headers:{
+                    Authorization:"Bearer "+localStorage.getItem("token")
+                }
+            })
         .then(response => response.json())
         .then(data =>{
-            // console.log(data);
+            console.log(data);
             settask(data.success);
         })
         .catch(err=>{
             console.log(err);
         })
+    }
 
-
-    },[])
-     console.log(task);
+    },[user])
     const labelstyle={
         display:'block',   
         textTransform:'capitalize',
@@ -78,11 +87,12 @@ function CampusTaskPanel() {
     }
     function submit()
     {
-        console.log(data);
+        const addedBy=user.addedByOrg?"organisation":"admin";
+        console.log(addedBy); 
         handleClose();
 
         // console.log(title.current.value + description.current.value + points.current.value);
-        fetch("http://localhost:4000/Orgtasks/ca-add-task",{
+        fetch(`http://localhost:4000/tasks/ca-add-task-${addedBy}`,{
             method:"post",
             headers:{
                 "Content-Type":"application/json",
@@ -104,39 +114,29 @@ function CampusTaskPanel() {
             console.log(err);
         })
     }
-    function Modalok()
-    {
+    function Popup()
+    {console.log(tagged);
         return (
-            <div >
-           
-            <Modal style={{position:'absolute',top:'0',zIndex:'2',background:'',width:'40%',height:'100%'}} show={show} onHide={handleClose}>
-                  <Modal.Header style={{background:'transparent',fontSize:'20px'}}>
-                    <Modal.Title>Fill This Form</Modal.Title>
-                  </Modal.Header>
-                <hr />
-               
-             <div style={{width:'100%'}}>
-            <Form />    
-             </div>
-               
-            
-              <Modal.Footer>
-                 
-                <Button style={{margin:'20px 5px'}} variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={submit}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>    
-            </Modal>
-
-</div>        
+            <div>
+                 <Modal show={show} onHide={handleClose}>
+                 <Modal.Header closeButton>
+                     <Modal.Title>task description</Modal.Title>
+                 </Modal.Header>
+                 <Modal.Body>
+                     {tagged==='1'?des:<Form />}
+                </Modal.Body>
+                  <Modal.Footer>
+             <Button variant="secondary" onClick={handleClose}>
+                 Close
+              </Button>
+             <Button variant="primary" onClick={submit}>
+                 Save Changes
+              </Button>
+              </Modal.Footer>
+           </Modal>
+                </div>
         )
     }
-
-   
-
     function Tasks()
     {
         return (
@@ -155,11 +155,14 @@ function CampusTaskPanel() {
                         return (
                             <tr>
                                 <td style={tableStyle}>{data.title}</td>
-                                <td style={tableStyle}>{data.description}</td>
+                                <td style={tableStyle}>
+                                <button className="btn btn-info"  onClick={(e)=>handleShow("1",data.description)}>View</button>
+                                 </td>
                                 <td style={tableStyle}>{data.points}</td>
                                 <td style={tableStyle}>{data.updatedAt}</td>
                                 <td style={tableStyle}>{data.role}</td>
-                                <td style={tableStyle}><button  onClick={()=>{handleShow(data)}} className="btn modal-trigger waves-effect waves-light btn">Submit</button>
+                                <td style={tableStyle}>
+                                    <button  onClick={()=>{handleShow("2",data)}}  className="btn btn-info">Submit</button>
                                 </td>
 
                             </tr>
@@ -198,9 +201,11 @@ function CampusTaskPanel() {
                 </div>
       
             </div>
+            {/* <Modalok /> */}
         </div>
         {/* MODAL INITIALISATION */}
-        <Modalok />            
+        <Popup />
+                    
     </div>
     )
 }

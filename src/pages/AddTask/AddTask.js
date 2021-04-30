@@ -5,14 +5,19 @@ import Form from 'react-bootstrap/Form'
 import { useHistory } from 'react-router';
 
 export default function AddTask() {
-    const history=useHistory();   
+   const history=useHistory();   
    const [title,settitle]=useState("");
    const [points,setpoints]=useState("");
    const [des,setdes]=useState("");
+   const [user,setuser]=useState("");
    const [submit,setsubmit]=useState("submit");
+   useEffect(()=>{
+    setuser(JSON.parse(localStorage.getItem('user')).role);
+    console.log(user);
+  },[user])
    function onsubmit(){
    setsubmit("Loading...")
-    fetch("http://localhost:4000/tasks/admin-add-task",{
+    fetch(`http://localhost:4000/tasks/${user}-add-task`,{
         method:"post",
         headers:{
             "Content-Type":"application/json",
@@ -30,9 +35,7 @@ export default function AddTask() {
      console.log(data);
      setsubmit("submit");
      alert(data.success);
-     history.push('/admin/addtask')
-    
-     // settask([data.task,...task]);
+     history.push(`/${user}/addtask`)
    
     })
     .catch(err=>{

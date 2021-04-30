@@ -9,14 +9,14 @@ const {verify , verifyOrg}=require('../middleware/middleware'); //used to verify
 
 
 // adding new task routes 
-router.post('/org-add-task',verifyOrg,(req,res)=>{
+router.post('/organisation-add-task',verifyOrg,(req,res)=>{
 
     addTask(req,'organisation',res,req.user) 
 
 })
 
 
-router.post('/ca-add-orgtask',verify,(req,res)=>{
+router.post('/ca-add-task-organisation',verify,(req,res)=>{
 
     addTask(req,'campus-ambassador',res,req.user)
 
@@ -31,7 +31,7 @@ router.post('/voulenteer-add-task',verify,(req,res)=>{
 // ---------------------------------------------------------------------------------------
 
 // get respective tasks routes
-router.get('/get-org-task',verify,(req,res)=>{
+router.get('/get-organisation-task',verify,(req,res)=>{
 
     fetchTask(req,'organisation',res,req.user)
 })

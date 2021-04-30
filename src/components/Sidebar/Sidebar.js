@@ -26,7 +26,7 @@ export default function Sidebar()
 
                 {/* admin add organisation route */}
                 <Link to="/admin/AddOrganisation" className="link">
-                  <li id="link" style={{color:location.pathname==='/admin/AddOrganisation'?'#1e90ff':'#7B7B7C',display:user.role==='admin'?"block":"none"}}>Add Organisation</li>
+                  <li id="link" style={{color:location.pathname==='/admin/AddOrganisation'?'#1e90ff':'#7B7B7C',display:user==='admin'?"block":"none"}}>Add Organisation</li>
                 </Link>
 
                  
