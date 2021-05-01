@@ -1,0 +1,124 @@
+.ca-admin>h1{
+    font-family: var(--secon);
+    font-weight: 400;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+.add-card{
+    display: flex;
+    background-color: white;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px 15px 1px 15px;
+    margin: 15px 0px 0px 0px;
+}
+.card-img{
+    width: 35%;
+    margin: 0px 30px 0px 0px;
+}
+.card-details{
+    margin: 0px 30px 0px 0px;
+}
+.card-details>h1{
+    font-family: var(--secon);
+    font-weight: 400;
+    margin: 3px 0px 10px 0px;
+    font-size: 1.8em;
+}
+.card-img>img{
+    width: 100%;
+    object-fit: cover;
+}
+.add-card-content{
+    font-family: var(--secon);
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.add-card-btn{
+    background-color: blueviolet;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: var(--secon);
+    font-size: 1.2em;
+    padding: 10px 12px;
+    width: 300px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0px;
+    transition: all 0.4s ease-in-out;
+}
+.add-card-btn:hover{
+    background-color: var(--btn);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.filter{
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px 15px 1px 15px;
+    margin: 25px 0px 0px 0px;
+    background-color: white;
+}
+.filter-title{
+    display: flex;
+    align-items: center;
+    font-family: var(--secon);
+    font-size: 1.2em;
+    margin: 0px 0px 10px 0px;
+}
+.filter-title>img{
+    width: 18px;
+    margin: 0px 8px 0px 0px;
+}
+.filter-options{
+    display: flex;
+    flex-direction: column;
+}
+.filter-option{
+    margin-bottom: 15px;
+}
+.options-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px;
+    font-size: 1.3em;
+    font-family: var(--secon);
+    margin: 0px 0px 10px 0px;
+}
+select{
+    min-width: 10px;
+    font-size: 18px;
+    text-align: center;
+    font-family: var(--secon);
+}
+option{
+    font-size: 1.2em;
+}
+.filter-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0px 15px 0px;
+}
+.filter-btn>button{
+    outline: none;
+    border: none;
+    font-size: 1.1em;
+    font-family: var(--secon);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 5px 12px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+.apply-btn{
+    margin: 0px 10px 0px 0px;
+    background-color: blueviolet;
+}
+.reset-btn{
+    background-color: black;
+}

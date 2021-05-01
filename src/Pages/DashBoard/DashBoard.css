@@ -1,0 +1,11 @@
+.dash {
+  display: grid;
+  grid-template-columns: 1.2fr 5fr;
+  background-color: var(--primary);
+}
+.dash-page{
+  overflow-x: hidden;
+}
+.page{
+  margin: 0px 20px;
+}
